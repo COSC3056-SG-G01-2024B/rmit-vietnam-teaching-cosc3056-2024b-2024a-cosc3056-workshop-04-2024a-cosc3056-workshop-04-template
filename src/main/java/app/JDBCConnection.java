@@ -191,5 +191,41 @@ public class JDBCConnection {
 
 
     // TODO: Keep adding more methods here to answer all of the questions from the Studio Class activities
+    public int getMovieCount() {
 
+        int movieCount=0; 
+
+        Connection connection = null;
+
+        try {
+            connection = DriverManager.getConnection(DATABASE);
+
+            Statement statement = connection.createStatement();
+            statement.setQueryTimeout(30); 
+
+            String query = "SELECT COUNT(*) FROM MOVIE";
+
+            ResultSet results = statement.executeQuery(query);
+
+            movieCount = results.getInt("count(*)");
+
+            statement.close();
+
+        }
+
+        catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                // connection close failed.
+                System.err.println(e.getMessage());
+            }
+        }
+        return movieCount;
+    }
 }

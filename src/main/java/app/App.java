@@ -73,6 +73,9 @@ public class App {
         // TODO: Add your code here for the other queries 
         //   Use the (static method or JDBCCOnnection) that you are most comfortable with
         // - Count the number of movies in the database
+        int movieCount = jdbc.getMovieCount();
+        System.out.println("The database contains " + movieCount + " movies.");
+        System.out.println("\n");
         // - Get all of the HORROR movies
 
         // Continue here with the other SQL queries
@@ -162,7 +165,7 @@ public class App {
             statement.setQueryTimeout(30);
 
             // The Query - TODO: complete this query
-            String query = "";
+            String query = "SELECT * FROM star";
             
             // Get Result
             ResultSet results = statement.executeQuery(query);
@@ -170,6 +173,9 @@ public class App {
             // Process all of the results
             while (results.next()) {
                 // TODO: Complete this
+                String starName = results.getString("starname");
+
+                starNames.add(starName);
             }
 
             // Close the statement because we are done with it
