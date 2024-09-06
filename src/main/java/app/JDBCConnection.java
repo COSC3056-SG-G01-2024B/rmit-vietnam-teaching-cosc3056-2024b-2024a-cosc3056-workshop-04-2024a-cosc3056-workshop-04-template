@@ -228,4 +228,30 @@ public class JDBCConnection {
         }
         return movieCount;
     }
+
+    public ArrayList<Movie> question6() {
+
+        ArrayList<Movie> moviesList = new ArrayList<Movie>();
+    
+        try (Connection connection = DriverManager.getConnection(DATABASE); Statement statement = connection.createStatement();) {
+            statement.setQueryTimeout(30);
+
+            String query = "SELECT * FROM movie WHERE (mvtype LIKE  'HORROR' AND noms > 0) OR (mvtype LIKE  'COMEDY') ORDER BY mvtype";
+            
+            ResultSet results = statement.executeQuery(query);
+
+            while(results.next()) {
+                Movie movie = new Movie(results.getInt("mvnumb"),results.getString("mvtitle"),results.getInt("yrmde"),results.getString("mvtype"));
+
+                moviesList.add(movie);
+            }
+
+
+        }
+        catch(SQLException e) {
+            System.err.println(e.getMessage());
+        }
+    
+        return moviesList;
+    }
 }

@@ -79,6 +79,17 @@ public class App {
         // - Get all of the HORROR movies
 
         // Continue here with the other SQL queries
+
+        // Question 6 - Phuc
+
+
+        ArrayList<Movie> question6 = jdbc.question6();
+        System.out.println("Question 6 - Updated Movies List: ");
+        for (Movie movie: question6) {
+            String movieInfo = "\t" + movie.name + "\n\t\tGenre: " + movie.genre + "\n\t\tRelease Year: " + movie.year;
+            System.out.println(movieInfo);
+        }
+        System.out.println("\n");
     }
 
 
