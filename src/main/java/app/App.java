@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.sql.rowset.JdbcRowSet;
+
 /**
  * Main Application Class.
  * <p>
@@ -90,7 +92,24 @@ public class App {
             System.out.println(movieInfo);
         }
         System.out.println("\n");
+
+        ArrayList<Movie>question7 = jdbc.question7();
+    System.out.println("Question 7 - 2 MOVIES Genre with NOMS");
+    for (Movie movie: question7) {
+        String movieInfo = "\t" + movie.name + "\n\t\tGenre: " + movie.genre + "\n\t\tRelease Year: " + movie.year;
+        System.out.println(movieInfo);
+    }System.out.println("\n");
+
+
+    ArrayList<Movie>question8 = jdbc.question8();
+    System.out.println("Question 8 - Movies with over 3 awards");
+    for (Movie movie: question8) {
+        String movieInfo = "\t" + movie.name + "\n\t\tGenre: " + movie.genre + "\n\t\tRelease Year: " + movie.year;
+        System.out.println(movieInfo);}
+        System.out.println("\n");
     }
+
+    
 
 
 

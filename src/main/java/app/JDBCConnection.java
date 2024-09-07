@@ -254,4 +254,63 @@ public class JDBCConnection {
     
         return moviesList;
     }
+
+    public ArrayList<Movie> question7(){
+
+        ArrayList<Movie> moviesList = new ArrayList();
+
+        try  {
+            Connection connection = DriverManager.getConnection(DATABASE);
+        Statement statement = connection.createStatement();
+        statement.setQueryTimeout(30);
+            String query = "SELECT * FROM MOVIE WHERE (MVTYPE LIKE 'HORROR' AND NOMS > 0) OR (MVTYPE LIKE 'COMEDY' AND NOMS > 0);";
+
+            ResultSet results = statement.executeQuery(query);
+
+            while(results.next()) {
+                Movie movie = new Movie(
+                results.getInt("mvnumb"),
+                results.getString("mvtitle"),
+                results.getInt("yrmde"),
+                results.getString("mvtype")
+                );
+
+                moviesList.add(movie);
+            }
+            
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        return moviesList;
+    }
+
+    public ArrayList<Movie> question8() {
+        ArrayList<Movie> movieList = new ArrayList();
+
+        try {
+            Connection connection = DriverManager.getConnection(DATABASE);
+            Statement statement = connection.createStatement();
+            statement.setQueryTimeout(30);
+            String query = "SELECT * FROM MOVIE WHERE AWRD > 3";
+
+            ResultSet results = statement.executeQuery(query);
+
+            while(results.next()){
+                Movie movie = new Movie(
+                    results.getInt("mvnumb"),
+                    results.getString("mvtitle"),
+                    results.getInt("yrmde"),
+                    results.getString("mvtype")
+                );
+
+                movieList.add(movie);
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        return movieList;
+    }
+
+
 }
